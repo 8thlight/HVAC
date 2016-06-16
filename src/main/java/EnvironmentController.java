@@ -1,8 +1,10 @@
 /**
  * Created by rosanna_corvino on 6/14/16.
  */
-public class EnvironmentController {
+public class EnvironmentController implements EnvironmentInterface{
     private HVAC hvac;
+    private Integer minTemp;
+    private Integer maxTemp;
 
     public boolean heatStatus;
     public boolean coolStatus;
@@ -12,8 +14,10 @@ public class EnvironmentController {
     public int coolOnCount;
     public int coolOffCount;
 
-    public EnvironmentController(HVAC hvac){
+    public EnvironmentController(HVAC hvac,  Integer minTemp, Integer maxTemp){
         this.hvac = hvac;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
 
         heatStatus = false;
         coolStatus = false;
@@ -25,11 +29,11 @@ public class EnvironmentController {
     }
 
     public void tick(){
-        if (hvac.temp() < 65){
+        if (hvac.temp() < minTemp){
             turnOnHeat();
         }
 
-        if (hvac.temp() > 75){
+        if (hvac.temp() > maxTemp){
             turnOnCool();
         }
     }
@@ -134,5 +138,23 @@ public class EnvironmentController {
         else{
             coolOffCount = coolOffCount + 1;
         }
+    }
+
+    public Integer getMinTemp() {
+        return minTemp;
+    }
+
+    public Integer getMaxTemp() {
+        return maxTemp;
+    }
+
+    @Override
+    public void setMinTemp(int minTemp) {
+        this.minTemp = minTemp;
+    }
+
+    @Override
+    public void setMaxTemp(int maxTemp) {
+        this.maxTemp = maxTemp;
     }
 }

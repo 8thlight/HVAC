@@ -3,6 +3,4 @@ public interface HVAC {
     void cool(boolean on);
     void fan(boolean on);
     int temp();
-
-
 }

@@ -5,10 +5,13 @@ import static org.junit.Assert.assertEquals;
  * Created by rosanna_corvino on 6/14/16.
  */
 public class EnvironmentControllerTest {
+    public static Integer minTemp = 65;
+    public static Integer maxTemp = 75;
+
     @Test
     public void turnHeatOn(){
         Nest hvac = new Nest(60);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
         environmentController.tick();
 
         assertEquals(environmentController.heatStatus, true);
@@ -18,7 +21,7 @@ public class EnvironmentControllerTest {
     @Test
     public void turnCoolOn(){
         Nest hvac = new Nest(80);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
         environmentController.tick();
 
         assertEquals(environmentController.heatStatus, false);
@@ -28,7 +31,7 @@ public class EnvironmentControllerTest {
     @Test
     public void coolOnCountCheck(){
         Nest hvac = new Nest(80);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
 
         environmentController.tick();
         environmentController.tick();
@@ -43,7 +46,7 @@ public class EnvironmentControllerTest {
     @Test
     public void heatOnCountCheck(){
         Nest hvac = new Nest(60);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
 
         environmentController.tick();
         environmentController.tick();
@@ -58,7 +61,7 @@ public class EnvironmentControllerTest {
     @Test
     public void fanOffBeforeThreeMinutesCoolOff(){
         Nest hvac = new Nest(60);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
 
         environmentController.tick();
         environmentController.tick();
@@ -73,7 +76,7 @@ public class EnvironmentControllerTest {
     @Test
     public void fanOnAfterThreeMinutesCoolOff(){
         Nest hvac = new Nest(60);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
 
         environmentController.tick();
         environmentController.tick();
@@ -90,7 +93,7 @@ public class EnvironmentControllerTest {
     @Test
     public void fanOffBeforeFiveMinutesHeatOff(){
         Nest hvac = new Nest(80);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
 
         environmentController.tick();
         environmentController.tick();
@@ -105,7 +108,7 @@ public class EnvironmentControllerTest {
     @Test
     public void fanOnAfterFiveMinutesHeatOff(){
         Nest hvac = new Nest(80);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
 
         environmentController.tick();
         environmentController.tick();
@@ -124,7 +127,7 @@ public class EnvironmentControllerTest {
     @Test
     public void everythingOffWhenInGoodRange(){
         Nest hvac = new Nest(70);
-        EnvironmentController environmentController = new EnvironmentController(hvac);
+        EnvironmentController environmentController = new EnvironmentController(hvac, minTemp, maxTemp);
 
         assertEquals(environmentController.heatStatus, false);
         assertEquals(environmentController.coolStatus, false);
