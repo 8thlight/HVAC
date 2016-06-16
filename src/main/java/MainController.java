@@ -23,7 +23,7 @@ public class MainController {
         EnvironmentInterface environmentController =
                 new EnvironmentController(hvac, minTemp, maxTemp);
         Socket socket = new Socket("localhost", 5000);
-        SocketImpl socketImpl = new SocketImpl();
+        final SocketImpl socketImpl = new SocketImpl();
         SocketTranslator socketTranslator = new SocketTranslator(environmentController);
         socketImpl.setCommandTranslator(socketTranslator);
 
@@ -46,15 +46,9 @@ public class MainController {
             minTemp = Integer.valueOf(splitStr[0]);
             maxTemp = Integer.valueOf(splitStr[1]);
 
-            System.out.println(minTemp);
-            System.out.println(maxTemp);
-
             out.println(minTemp + " " + maxTemp);
             out.flush();
             socketImpl.acceptData();
-
-            System.out.println("EC MIN = " + environmentController.getMinTemp());
-            System.out.println("EC MAX = " + environmentController.getMaxTemp());
         }
 
         socket.close();
