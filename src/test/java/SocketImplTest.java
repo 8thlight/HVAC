@@ -36,7 +36,7 @@ public class SocketImplTest {
 
     @Test
     public void canCreateSocket() throws IOException, InterruptedException {
-        SocketImpl socketImpl = new SocketImpl();
+        final SocketImpl socketImpl = new SocketImpl();
         assertNull(socketImpl.serverSocket);
         Thread t = new Thread(new Runnable() {
             @Override
@@ -59,7 +59,7 @@ public class SocketImplTest {
 
     @Test
     public void passesDataFromTheSocketToTheTranslator() throws IOException {
-        SocketImpl socketImpl = new SocketImpl();
+        final SocketImpl socketImpl = new SocketImpl();
 
         new Thread() {
             @Override
@@ -88,7 +88,7 @@ public class SocketImplTest {
 
     @Test
     public void passDataMultipleTimesToSocket() throws IOException {
-        SocketImpl socketImpl = new SocketImpl();
+        final SocketImpl socketImpl = new SocketImpl();
 
         new Thread() {
             @Override
